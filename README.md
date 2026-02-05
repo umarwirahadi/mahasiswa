@@ -69,7 +69,9 @@ A comprehensive web-based portal for students in higher education institutions. 
 5. **Set proper permissions**
    ```bash
    chmod -R 755 .
-   chmod -R 777 application/logs
+   chmod 755 application/logs
+   # Ensure the web server user has write access to logs
+   # chown -R www-data:www-data application/logs  # For Apache on Debian/Ubuntu
    ```
 
 6. **Access the portal**

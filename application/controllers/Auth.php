@@ -12,8 +12,11 @@ class Auth extends Controller {
             $student_id = $_POST['student_id'] ?? '';
             $password = $_POST['password'] ?? '';
             
-            // Demo authentication - in production, verify against database
-            // Default credentials: student_id = "2024001", password = "password123"
+            // Demo authentication - hardcoded for demonstration purposes
+            // TODO: In production, replace with database authentication:
+            // $student = $this->db->fetchOne("SELECT * FROM students WHERE student_id = ?", [$student_id]);
+            // if ($student && password_verify($password, $student['password'])) { ... }
+            
             if ($student_id === '2024001' && $password === 'password123') {
                 $_SESSION['student_id'] = $student_id;
                 $_SESSION['student_name'] = 'John Doe';

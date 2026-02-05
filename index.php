@@ -23,6 +23,13 @@ $parts = explode('/', $request);
 $controller = !empty($parts[0]) ? $parts[0] : 'home';
 $action = !empty($parts[1]) ? $parts[1] : 'index';
 
+// Validate controller name - only allow alphanumeric characters
+if (!preg_match('/^[a-zA-Z0-9_]+$/', $controller)) {
+    http_response_code(404);
+    echo "404 - Invalid request";
+    exit;
+}
+
 // Load the appropriate controller
 $controllerFile = APPPATH . 'controllers/' . ucfirst($controller) . '.php';
 

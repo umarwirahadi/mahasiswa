@@ -18,6 +18,7 @@ class Database {
             $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             // For demo purposes, allow to continue without database
+            // In production, log this error: error_log($e->getMessage());
             $this->connection = null;
         }
     }
