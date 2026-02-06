@@ -4,110 +4,51 @@
 		<div class="col-12">
 			<div class="card card-stats card-round">
 				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-auto">
+					<div class="d-flex flex-column flex-md-row align-items-start align-items-md-center">
+						<div class="me-md-3 mb-3 mb-md-0">
 							<div class="avatar avatar-xl bg-primary rounded-circle">
 								<i class="fas fa-user-graduate fa-2x text-white"></i>
 							</div>
 						</div>
-						<div class="col">
-							<div class="row">
-								<div class="col-md-4 col-sm-6 mb-2 mb-md-0">
+						<div class="flex-grow-1 w-100">
+							<div class="row g-3">
+								<div class="col-12 col-sm-6 col-md-4">
 									<span class="text-muted small d-block">Nama Mahasiswa</span>
 									<strong class="h6 mb-0">Ahmad Rizki Pratama</strong>
 								</div>
-								<div class="col-md-2 col-sm-6 mb-2 mb-md-0">
+								<div class="col-12 col-sm-6 col-md-2">
 									<span class="text-muted small d-block">NIM</span>
 									<strong class="h6 mb-0">2024001234</strong>
 								</div>
-								<div class="col-md-3 col-sm-6 mb-2 mb-md-0">
+								<div class="col-12 col-sm-6 col-md-3">
 									<span class="text-muted small d-block">Program Studi</span>
 									<strong class="h6 mb-0">Teknik Informatika</strong>
 								</div>
-								<div class="col-md-3 col-sm-6">
+								<div class="col-12 col-sm-6 col-md-3">
 									<span class="text-muted small d-block">Angkatan</span>
 									<strong class="h6 mb-0">2024</strong>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<!-- Overall Academic Summary -->
-	<div class="row mb-4">
-		<div class="col-sm-6 col-md-3">
-			<div class="card card-stats card-round">
-				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-icon">
-							<div class="icon-big text-center icon-primary bubble-shadow-small">
-								<i class="fas fa-graduation-cap"></i>
-							</div>
-						</div>
-						<div class="col col-stats ms-3 ms-sm-0">
-							<div class="numbers">
-								<p class="card-category">IPK</p>
-								<h4 class="card-title">3.71</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<div class="card card-stats card-round">
-				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-icon">
-							<div class="icon-big text-center icon-info bubble-shadow-small">
-								<i class="fas fa-book"></i>
-							</div>
-						</div>
-						<div class="col col-stats ms-3 ms-sm-0">
-							<div class="numbers">
-								<p class="card-category">Total SKS</p>
-								<h4 class="card-title">72</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<div class="card card-stats card-round">
-				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-icon">
-							<div class="icon-big text-center icon-success bubble-shadow-small">
-								<i class="fas fa-check-circle"></i>
-							</div>
-						</div>
-						<div class="col col-stats ms-3 ms-sm-0">
-							<div class="numbers">
-								<p class="card-category">Mata Kuliah Lulus</p>
-								<h4 class="card-title">24</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-3">
-			<div class="card card-stats card-round">
-				<div class="card-body">
-					<div class="row align-items-center">
-						<div class="col-icon">
-							<div class="icon-big text-center icon-warning bubble-shadow-small">
-								<i class="fas fa-clock"></i>
-							</div>
-						</div>
-						<div class="col col-stats ms-3 ms-sm-0">
-							<div class="numbers">
-								<p class="card-category">Semester Aktif</p>
-								<h4 class="card-title">4</h4>
+							<hr class="my-3" />
+
+							<div class="row g-3">
+								<div class="col-6 col-md-3">
+									<span class="text-muted small d-block">IPK</span>
+									<strong class="h6 mb-0">3.71</strong>
+								</div>
+								<div class="col-6 col-md-3">
+									<span class="text-muted small d-block">Total SKS</span>
+									<strong class="h6 mb-0">72</strong>
+								</div>
+								<div class="col-6 col-md-3">
+									<span class="text-muted small d-block">Matakuliah Lulus</span>
+									<strong class="h6 mb-0">24</strong>
+								</div>
+								<div class="col-6 col-md-3">
+									<span class="text-muted small d-block">Semester Aktif</span>
+									<strong class="h6 mb-0">4</strong>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -138,7 +79,7 @@
 					<ul class="nav nav-pills nav-secondary nav-pills-no-bd flex-column flex-md-row mb-4" id="semesterTabs" role="tablist">
 						<?php for ($i = 1; $i <= 8; $i++): ?>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link <?= $i === 1 ? 'active' : '' ?>" id="tab-smt<?= $i ?>" data-bs-toggle="pill" href="#smt<?= $i ?>" role="tab">
+							<a class="nav-link <?= $i === 1 ? 'active' : '' ?> px-3" id="tab-smt<?= $i ?>" data-bs-toggle="pill" href="#smt<?= $i ?>" role="tab">
 								<span class="d-none d-md-inline">Semester </span><?= $i ?>
 							</a>
 						</li>
@@ -163,42 +104,6 @@
 						
 						<?php for ($sem = 1; $sem <= 8; $sem++): ?>
 						<div class="tab-pane fade <?= $sem === 1 ? 'show active' : '' ?>" id="smt<?= $sem ?>" role="tabpanel">
-							
-							<!-- Semester Summary Cards -->
-							<div class="row mb-4">
-								<div class="col-6 col-md-3">
-									<div class="card bg-primary-gradient text-white">
-										<div class="card-body py-3 text-center">
-											<h3 class="mb-1 fw-bold"><?= number_format($semesters[$sem]['ips'], 2) ?></h3>
-											<small class="opacity-75">IPS</small>
-										</div>
-									</div>
-								</div>
-								<div class="col-6 col-md-3">
-									<div class="card bg-info-gradient text-white">
-										<div class="card-body py-3 text-center">
-											<h3 class="mb-1 fw-bold"><?= $semesters[$sem]['sks'] ?></h3>
-											<small class="opacity-75">Total SKS</small>
-										</div>
-									</div>
-								</div>
-								<div class="col-6 col-md-3">
-									<div class="card bg-success-gradient text-white">
-										<div class="card-body py-3 text-center">
-											<h3 class="mb-1 fw-bold"><?= $semesters[$sem]['courses'] ?></h3>
-											<small class="opacity-75">Mata Kuliah</small>
-										</div>
-									</div>
-								</div>
-								<div class="col-6 col-md-3">
-									<div class="card bg-warning-gradient text-dark">
-										<div class="card-body py-3 text-center">
-											<h3 class="mb-1 fw-bold"><?= $semesters[$sem]['sks'] > 0 ? number_format($semesters[$sem]['ips'] * $semesters[$sem]['sks'], 1) : '0.0' ?></h3>
-											<small class="opacity-75">Total Bobot</small>
-										</div>
-									</div>
-								</div>
-							</div>
 
 							<?php if ($semesters[$sem]['courses'] > 0): ?>
 							<!-- Course Table -->

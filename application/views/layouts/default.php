@@ -118,13 +118,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/riwayat-pembayaran">
+                            <a href="<?= site_url('pembayaran-mahasiswa') ?>">
                                 <i class="fas fa-dollar-sign"></i>
                                 <p>Riwayat pembayaran</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/logout">
+                            <a href="<?= site_url('logout') ?>">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p>Logout</p>
                             </a>
@@ -320,26 +320,17 @@
                     <nav class="pull-left">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="http://www.themekita.com">
-                                    ThemeKita
+                                <a class="nav-link" href="http://www.piksi.ac.id">
+                                    www.piksi.ac.id
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Help </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"> Licenses </a>
-                            </li>
+                            
                         </ul>
                     </nav>
-                    <div class="copyright">
-                        2026, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="http://www.themekita.com">umar Wirahadi</a>
-                    </div>
                     <div>
-                        Distributed by
-                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
-                    </div>
+                        Copyright 2026, made with <i class="fa fa-heart heart text-danger"></i> by
+                        <a href="http://www.piksi.ac.id">SI/HW Politeknik Piksi Ganesha</a>
+                    </div>                   
                 </div>
             </footer>
         </div>

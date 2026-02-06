@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mahasiswa extends CI_Controller {
+class Mahasiswa extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -14,12 +14,15 @@ class Mahasiswa extends CI_Controller {
 	public function index()
 	{
 		$attribute['title'] = 'Data mahasiswa';
+		$attribute['mahasiswa'] = $this->MahasiswaModel->get_data_mahasiswa_by_id($this->session->userdata('mahasiswa_id'));
 		$data['content'] = $this->load->view('mahasiswa/index', $attribute, TRUE);
 		$this->load->view('layouts/default', $data);
 	}
 
 	public function create()
 	{
+		
+		$attribute['mahasiswa'] = $this->session->userdata('mahasiswa');
 		$attribute['title'] = 'Create Data Mahasiswa';
 		$attribute['sub_title'] = 'Data profile saya';
 		$attribute['referensi'] = $this->ReferensiModel->getByDataKelompok(['AGAMA','PEKERJAAN','TRANSPORTASI','JENIS_TINGGAL','PENDIDIKAN','PENGHASILAN']);

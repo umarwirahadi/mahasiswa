@@ -53,6 +53,10 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['login'] = 'auth/login';
+$route['register'] = 'auth/register';
+$route['logout'] = 'auth/logout';
+
 $route['profile'] = 'welcome/profile';
 
 $route['mahasiswa'] = 'mahasiswa/index';
@@ -60,3 +64,6 @@ $route['mahasiswa/create'] = 'mahasiswa/create';
 $route['mahasiswa/store'] = 'mahasiswa/store';
 $route['kartu-hasil-studi'] = 'khs/index';
 $route['kartu-hasil-studi/(:any)'] = 'khs/show/$1';
+
+$route['pembayaran-mahasiswa'] = 'pembayaran/index';
+$route['pembayaran-mahasiswa/(:any)'] = 'pembayaran/show/$1';

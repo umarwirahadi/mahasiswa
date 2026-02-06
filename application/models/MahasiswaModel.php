@@ -5,7 +5,8 @@ use Ramsey\Uuid\Uuid;
 
 class MahasiswaModel extends CI_Model {
 
-    private $table = 'mahasiswa';
+    private $table = 'mahasiswa_new';
+	protected $prev_mahasiswa_table = 'mahasiswa';
     protected $fields = [
 'id',
 'nama_mahasiswa',
@@ -56,6 +57,9 @@ class MahasiswaModel extends CI_Model {
     public function get_mahasiswa_by_id($id) {
         return $this->db->get_where($this->table, ['id' => $id])->row();
     }
+    public function get_data_mahasiswa_by_id($id) {
+        return $this->db->get_where($this->table, ['id' => $id])->result();
+    }
 
     public function insert_mahasiswa($data) {
         $data['id'] = Uuid::uuid4()->toString();
@@ -71,4 +75,29 @@ class MahasiswaModel extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete($this->table);
     }
+
+	/* check for previous mahasiswa table related  */
+	public function get_prev_mahasiswa_by_npm_and_birth_date($npm, $birth_date) {
+		return $this->db->get_where($this->prev_mahasiswa_table, ['npm' => $npm, 'tanggallahir' => $birth_date])->row();
+	}
+
+
+
+    public function get_mahasiswa_new_by_email($email)
+    {
+        $email = trim((string) $email);
+        if ($email === '') {
+            return null;
+        }
+
+        if (!$this->db->table_exists($this->table) || !$this->db->field_exists('email', $this->table)) {
+            return null;
+        }
+
+        return $this->db->get_where($this->table, ['email' => $email])->row();
+    }
+
+  
+
+	
 }

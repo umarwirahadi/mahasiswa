@@ -17,6 +17,14 @@
 					</button>
 				</div>
 			<?php endif; ?>
+			<?php if ($this->session->flashdata('error')): ?>
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<?= $this->session->flashdata('error') ?>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<?php endif; ?>
 			<div class="card">
 				<div class="card-header">
 					<div class="card-title">Tambah Data Mahasiswa</div>
@@ -31,8 +39,8 @@
 							</div>
 							<div class="col-md-6 col-lg-6">
 								<div class="form-group">
-									<label for="nama_mahasiswa">Nama Mahasiswa</label>
-									<input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa" placeholder="Masukkan Nama Mahasiswa" required value="<?= set_value('nama_mahasiswa') ?>">
+									<label for="nama_mahasiswa">Nama Mahasiswa </label>
+									<input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa" placeholder="Masukkan Nama Mahasiswa" required value="<?= isset($mahasiswa) ? $mahasiswa->nama : '' ?>">
 								</div>
 								<div class="form-group">
 									<label for="jenis_kelamin">Jenis Kelamin</label>
@@ -47,7 +55,7 @@
 								</div>
 								<div class="form-group">
 									<label for="tanggal_lahir">Tanggal Lahir</label>
-									<input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required value="<?= set_value('tanggal_lahir') ?>">
+									<input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required value="<?= isset($mahasiswa) ? $mahasiswa->tanggallahir : set_value('tanggal_lahir') ?>">
 								</div>
 
 							</div>
@@ -87,7 +95,7 @@
 							<div class="col-md-6 col-lg-6">
 								<div class="form-group">
 									<label for="jalan">Jalan</label>
-									<input type="text" class="form-control" id="jalan" name="jalan" placeholder="Masukkan Jalan" value="<?= set_value('jalan') ?>">
+									<input type="text" class="form-control" id="jalan" name="jalan" placeholder="Masukkan Jalan" value="<?= isset($mahasiswa) ? $mahasiswa->alamat1 : set_value('jalan') ?>">
 								</div>
 								<div class="form-group">
 									<label for="dusun">Dusun</label>
@@ -161,13 +169,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="telepon">Telepon</label>
-											<input type="tel" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon" value="<?= set_value('telepon') ?>">
+											<input type="tel" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon" value="<?= isset($mahasiswa) ? $mahasiswa->tlprumah : set_value('telepon') ?>">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="handphone">Handphone</label>
-											<input type="tel" class="form-control" id="handphone" name="handphone" placeholder="Masukkan Nomor Handphone" value="<?= set_value('handphone') ?>">
+											<input type="tel" class="form-control" id="handphone" name="handphone" placeholder="Masukkan Nomor Handphone" value="<?= isset($mahasiswa) ? $mahasiswa->hp : set_value('handphone') ?>">
 										</div>
 									</div>
 
@@ -176,7 +184,7 @@
 
 								<div class="form-group">
 									<label for="email">Email</label>
-									<input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" value="<?= set_value('email') ?>">
+									<input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" value="<?= $this->session->userdata('email')!=='' ? $this->session->userdata('email') : set_value('email') ?>">
 								</div>
 							</div>
 						</div>
