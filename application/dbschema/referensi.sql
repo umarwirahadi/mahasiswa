@@ -1,5 +1,5 @@
-CREATE TABLE m_referensi_global (
-    id_ref INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE referensi_global (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     
     -- Pembeda (Discriminator)
     kelompok VARCHAR(50) NOT NULL COMMENT 'Contoh: AGAMA, PEKERJAAN, PENDIDIKAN',

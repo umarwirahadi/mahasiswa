@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+use Ramsey\Uuid\Uuid;
+
 class MahasiswaModel extends CI_Model {
 
     private $table = 'mahasiswa';
@@ -55,8 +58,7 @@ class MahasiswaModel extends CI_Model {
     }
 
     public function insert_mahasiswa($data) {
-        //make uui for id
-        $data['id'] = uniqid();
+        $data['id'] = Uuid::uuid4()->toString();
         return $this->db->insert($this->table, $data);
     }
 

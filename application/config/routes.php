@@ -55,4 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['profile'] = 'welcome/profile';
 
+$route['mahasiswa'] = 'mahasiswa/index';
 $route['mahasiswa/create'] = 'mahasiswa/create';
+$route['mahasiswa/store'] = 'mahasiswa/store';
+$route['kartu-hasil-studi'] = 'khs/index';
+$route['kartu-hasil-studi/(:any)'] = 'khs/show/$1';

@@ -106,7 +106,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/kartu-hasil-studi">
+                            <a href="<?= site_url('kartu-hasil-studi') ?>">
                                 <i class="far fa-file-alt"></i>
                                 <p>Kartu Hasil Studi (KHS)</p>
                             </a>
