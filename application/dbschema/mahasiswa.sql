@@ -1,6 +1,6 @@
-CREATE TABLE m_mahasiswa (
+CREATE TABLE mahasiswa (
     -- == IDENTITAS UTAMA ==
-    id_mahasiswa CHAR(36) NOT NULL,
+    id CHAR(36) NOT NULL,
     nama_mahasiswa VARCHAR(100) NOT NULL,
     jenis_kelamin ENUM('L', 'P') NOT NULL,
     tempat_lahir VARCHAR(80) NOT NULL,
@@ -53,6 +53,6 @@ CREATE TABLE m_mahasiswa (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    PRIMARY KEY (id_mahasiswa),
+    PRIMARY KEY (id),
     UNIQUE KEY unique_nik (nik)
 );

@@ -16,17 +16,30 @@
                         <table id="mahasiswa-table" class="display table table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th>NIK</th>
                                     <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
-                                    <th>Telepon</th>
-                                    <th>Email</th>
+                                    <th>HP</th>
+                                    <th>NPM</th>
+                                    <th>Kelas</th>
                                     <th style="width: 10%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Data will be populated here -->
+								<?php foreach ($mahasiswa as $mhs): ?>
+								<tr>
+									<td><?= htmlspecialchars($mhs->nik, ENT_QUOTES, 'UTF-8') ?></td>
+									<td><?= htmlspecialchars($mhs->nama_mahasiswa, ENT_QUOTES, 'UTF-8') ?></td>
+									<td><?= htmlspecialchars($mhs->tanggal_lahir, ENT_QUOTES, 'UTF-8') ?></td>
+									<td><?= htmlspecialchars($mhs->handphone, ENT_QUOTES, 'UTF-8') ?></td>
+									<td>-</td>
+									<td>-</td>
+									<td>
+										<a href="<?= base_url('mahasiswa/edit/' . $mhs->id) ?>" class="btn btn-sm btn-warning"><span class="fas fa-edit"></span></a>
+										<a href="<?= base_url('mahasiswa/delete/' . $mhs->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><span class="fas fa-trash"></span></a>
+									</td>
+								</tr>
+								<?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
