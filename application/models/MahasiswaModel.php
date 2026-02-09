@@ -79,8 +79,15 @@ class MahasiswaModel extends CI_Model {
 	/* check for previous mahasiswa table related  */
 	public function get_prev_mahasiswa_by_npm_and_birth_date($npm, $birth_date) {
 		return $this->db->get_where($this->prev_mahasiswa_table, ['npm' => $npm, 'tanggallahir' => $birth_date])->row();
+
 	}
 
+	public function cek_mahasiswa_lama($npm, $tanggal_lahir) {
+        $this->db->where('npm', $npm);
+        $this->db->where('tanggallahir', $tanggal_lahir);
+        $query = $this->db->get($this->prev_mahasiswa_table);
+        return $query->row();
+    }
 
 
     public function get_mahasiswa_new_by_email($email)

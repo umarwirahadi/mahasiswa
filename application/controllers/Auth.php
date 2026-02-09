@@ -21,6 +21,7 @@ class Auth extends MY_Controller
 		$this->load->library('form_validation');
 		$this->load->helper(['url', 'form']);
 		$this->load->model('AuthModel');
+		$this->load->model('MahasiswaModel');
 	}
 
 	public function login()
@@ -83,8 +84,8 @@ class Auth extends MY_Controller
 		$isPost = isset($_SERVER['REQUEST_METHOD']) && strtoupper((string) $_SERVER['REQUEST_METHOD']) === 'POST';
 		if ($isPost) {
 			$this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required|min_length[3]|max_length[100]');
-			$this->form_validation->set_rules('nim', 'NIM', 'trim|required|min_length[5]|max_length[30]');
-			$this->form_validation->set_rules('angkatan', 'Angkatan', 'trim|required|integer|greater_than_equal_to[2000]|less_than_equal_to[2100]');
+			$this->form_validation->set_rules('nim', 'NPM', 'trim|required|min_length[5]|max_length[30]');
+			$this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'trim|required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[60]');
 			$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
 			$this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required|matches[password]');
@@ -94,8 +95,18 @@ class Auth extends MY_Controller
 
 			if ($this->form_validation->run() === TRUE) {
 				$nim = $this->input->post('nim', TRUE);
+				$tanggal_lahir = $this->input->post('tanggal_lahir', TRUE);
 				$email = $this->input->post('email', TRUE);
 				$password = (string) $this->input->post('password', FALSE);
+
+				// Check if mahasiswa exists in old table
+				$mahasiswa_lama = $this->MahasiswaModel->cek_mahasiswa_lama($nim, $tanggal_lahir);
+				
+				if (!$mahasiswa_lama) {
+					$this->session->set_flashdata('error', 'Data mahasiswa tidak ditemukan. Pastikan NPM dan Tanggal Lahir sesuai dengan data akademik.');
+					redirect('register');
+					return;
+				}
 
 				$userId = $this->AuthModel->register([
 					'nim' => $nim,

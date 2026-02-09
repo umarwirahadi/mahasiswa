@@ -58,17 +58,16 @@
 
 								<div class="col-12 col-sm-6">
 									<div class="form-group">
-										<label for="nim">NIM</label>
-										<input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" required value="<?= set_value('nim') ?>" />
+										<label for="nim">NPM</label>
+										<input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NPM" required value="<?= set_value('nim') ?>" />
 									</div>
 								</div>
 								<div class="col-12 col-sm-6">
 									<div class="form-group">
-										<label for="angkatan">Angkatan</label>
-										<input type="number" class="form-control" id="angkatan" name="angkatan" placeholder="Contoh: 2024" min="2000" max="2100" required value="<?= set_value('angkatan') ?>" />
+										<label for="tanggal_lahir">Tanggal Lahir</label>
+										<input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required value="<?= set_value('tanggal_lahir') ?>" />
 									</div>
 								</div>
-
 								<div class="col-12">
 									<div class="form-group">
 										<label for="email">Email</label>
