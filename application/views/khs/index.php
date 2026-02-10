@@ -1,6 +1,6 @@
 <div class="page-inner">
 	<!-- Student Info Card -->
-	<div class="row mb-4">
+	<!-- <div class="row mb-4">
 		<div class="col-12">
 			<div class="card card-stats card-round">
 				<div class="card-body">
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- KHS Tabs -->
 	<div class="row">
@@ -88,24 +88,38 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content" id="semesterTabContent">
-						<?php 
-						// Sample data for demonstration - in real app, this would come from controller
-						$semesters = [
-							1 => ['ips' => 3.71, 'sks' => 9, 'courses' => 3],
-							2 => ['ips' => 3.65, 'sks' => 12, 'courses' => 4],
-							3 => ['ips' => 3.80, 'sks' => 15, 'courses' => 5],
-							4 => ['ips' => 3.55, 'sks' => 18, 'courses' => 6],
-							5 => ['ips' => 3.90, 'sks' => 18, 'courses' => 6],
-							6 => ['ips' => 0, 'sks' => 0, 'courses' => 0],
-							7 => ['ips' => 0, 'sks' => 0, 'courses' => 0],
-							8 => ['ips' => 0, 'sks' => 0, 'courses' => 0],
-						];
-						?>
-						
 						<?php for ($sem = 1; $sem <= 8; $sem++): ?>
+						<?php 
+						// Filter khs_list for current semester
+						$semester_courses = isset($khs_list) ? array_filter($khs_list, function($item) use ($sem) {
+							if (is_object($item)) {
+								$item_sem = isset($item->semester) ? $item->semester : (isset($item->smt) ? $item->smt : 0);
+							} else {
+								$item_sem = isset($item['smt']) ? $item['smt'] : (isset($item['smt']) ? $item['smt'] : 0);
+							}
+							return $item_sem == $sem;
+						}) : [];
+						$semester_courses = array_values($semester_courses);
+						
+						// Calculate totals for current semester
+						$total_sks = 0;
+						$total_bobot = 0;
+						foreach ($semester_courses as $course) {
+							if (is_object($course)) {
+								$sks = isset($course->sks) ? $course->sks : 0;
+								$bobot = isset($course->bobot) ? $course->bobot : 0;
+							} else {
+								$sks = isset($course['sks']) ? $course['sks'] : 0;
+								$bobot = isset($course['bobot']) ? $course['bobot'] : 0;
+							}
+							$total_sks += $sks;
+							$total_bobot += ($sks * $bobot);
+						}
+						$ips = $total_sks > 0 ? $total_bobot / $total_sks : 0;
+						?>
 						<div class="tab-pane fade <?= $sem === 1 ? 'show active' : '' ?>" id="smt<?= $sem ?>" role="tabpanel">
 
-							<?php if ($semesters[$sem]['courses'] > 0): ?>
+							<?php if (count($semester_courses) > 0): ?>
 							<!-- Course Table -->
 							<div class="table-responsive">
 								<table class="table table-hover table-striped align-middle">
@@ -115,46 +129,66 @@
 											<th style="width: 120px;">Kode MK</th>
 											<th>Nama Mata Kuliah</th>
 											<th class="text-center" style="width: 80px;">SKS</th>
+											<th class="text-center" style="width: 80px;">UTS</th>
+											<th class="text-center" style="width: 80px;">UAS</th>
 											<th class="text-center" style="width: 80px;">Nilai</th>
 											<th class="text-center" style="width: 80px;">Bobot</th>
 											<th class="text-center" style="width: 100px;">SKS × Bobot</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php $no = 1; foreach ($semester_courses as $course): ?>
+										<?php 
+										if (is_object($course)) {
+											$kodematkul = isset($course->kodematkul) ? $course->kodematkul : '-';
+											$namamatkul = isset($course->namamatkul) ? $course->namamatkul : '-';
+											$sks = isset($course->sks) ? $course->sks : 0;
+											$uts = isset($course->nilaiuts) ? $course->nilaiuts : '-';
+											$uas = isset($course->nilaiuas) ? $course->nilaiuas : '-';
+											$nilai = isset($course->nilaiakhir) ? $course->nilaiakhir : '-';
+											$bobot = isset($course->bobot) ? $course->bobot : 0;
+										} else {
+											$kodematkul = isset($course['kodematkul']) ? $course['kodematkul'] : '-';
+											$namamatkul = isset($course['namamatkul']) ? $course['namamatkul'] : '-';
+											$sks = isset($course['sks']) ? $course['sks'] : 0;
+											$uts = isset($course['nilaiuts']) ? $course['nilaiuts'] : '-';
+											$uas = isset($course['nilaiuas']) ? $course['nilaiuas'] : '-';
+											$nilai = isset($course['nilaiakhir']) ? $course['nilaiakhir'] : '-';
+											$bobot = isset($course['bobot']) ? $course['bobot'] : 0;
+										}
+										$sks_bobot = $sks * $bobot;
+										
+										// Determine badge color based on grade
+										$badge_class = 'bg-secondary';
+										if (in_array($nilai, ['A', 'A-'])) {
+											$badge_class = 'bg-success';
+										} elseif (in_array($nilai, ['B+', 'B', 'B-'])) {
+											$badge_class = 'bg-primary';
+										} elseif (in_array($nilai, ['C+', 'C'])) {
+											$badge_class = 'bg-warning';
+										} elseif (in_array($nilai, ['D', 'E'])) {
+											$badge_class = 'bg-danger';
+										}
+										?>
 										<tr>
-											<td class="text-center">1</td>
-											<td><span class="badge bg-secondary">MK001</span></td>
-											<td>Pengantar Teknologi Informasi</td>
-											<td class="text-center">3</td>
-											<td class="text-center"><span class="badge bg-success">A</span></td>
-											<td class="text-center">4.0</td>
-											<td class="text-center fw-bold">12.0</td>
+											<td class="text-center"><?= $no++ ?></td>
+											<td><span class="badge bg-secondary"><?= htmlspecialchars($kodematkul) ?></span></td>
+											<td><?= htmlspecialchars($namamatkul) ?></td>
+											<td class="text-center"><?= $sks ?></td>
+											<td class="text-center"><?= htmlspecialchars($uts) ?></td>
+											<td class="text-center"><?= htmlspecialchars($uas) ?></td>
+											<td class="text-center"><span class="badge <?= $badge_class ?>"><?= htmlspecialchars($nilai) ?></span></td>
+											<td class="text-center"><?= number_format($bobot, 1) ?></td>
+											<td class="text-center fw-bold"><?= number_format($sks_bobot, 1) ?></td>
 										</tr>
-										<tr>
-											<td class="text-center">2</td>
-											<td><span class="badge bg-secondary">MK002</span></td>
-											<td>Matematika Dasar</td>
-											<td class="text-center">4</td>
-											<td class="text-center"><span class="badge bg-primary">B+</span></td>
-											<td class="text-center">3.5</td>
-											<td class="text-center fw-bold">14.0</td>
-										</tr>
-										<tr>
-											<td class="text-center">3</td>
-											<td><span class="badge bg-secondary">MK003</span></td>
-											<td>Bahasa Indonesia</td>
-											<td class="text-center">2</td>
-											<td class="text-center"><span class="badge bg-success">A-</span></td>
-											<td class="text-center">3.7</td>
-											<td class="text-center fw-bold">7.4</td>
-										</tr>
+										<?php endforeach; ?>
 									</tbody>
 									<tfoot class="table-light">
 										<tr class="fw-bold">
 											<td colspan="3" class="text-end">Total:</td>
-											<td class="text-center"><?= $semesters[$sem]['sks'] ?></td>
+											<td class="text-center"><?= $total_sks ?></td>
 											<td colspan="2" class="text-end">IPS:</td>
-											<td class="text-center text-primary"><?= number_format($semesters[$sem]['ips'], 2) ?></td>
+											<td class="text-center text-primary"><?= number_format($ips, 2) ?></td>
 										</tr>
 									</tfoot>
 								</table>

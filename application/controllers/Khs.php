@@ -11,6 +11,8 @@ class Khs extends MY_Controller {
 	
 	public function index()
 	{
+		$nim = (string) $this->session->userdata('nim');
+		$attribute['khs_list'] = $this->KhsModel->get_nilai_by_npm($nim);
 		$attribute['title'] = 'Data KHS Mahasiswa';
 		$data['content'] = $this->load->view('khs/index', $attribute, TRUE);
 		$this->load->view('layouts/default', $data);

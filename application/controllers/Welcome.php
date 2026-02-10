@@ -58,7 +58,7 @@ class Welcome extends MY_Controller {
 			$attribute['is_mahasiswa_found'] = (bool) $mahasiswa['data'];
 			$data['content'] = $this->load->view('dashboard', $attribute, TRUE);
 		} else {
-			$this->session->set_flashdata('error', 'Data mahasiswa tidak ditemukan. Silakan lengkapi data diri Anda terlebih dahulu..!');
+			$this->session->set_flashdata('error', 'Data mahasiswa tidak lengkap. Silakan lengkapi data diri Anda terlebih dahulu..!');
 			$this->session->set_userdata(['mahasiswa'=>$mahasiswa['data']]);
 			redirect('mahasiswa/create');
 			return;
