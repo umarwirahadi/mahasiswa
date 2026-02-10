@@ -112,6 +112,7 @@ class Auth extends MY_Controller
 					'nim' => $nim,
 					'email' => $email,
 					'password' => $password,
+					'tanggal_lahir' => $tanggal_lahir,
 				]);
 
 				if ($userId !== false) {

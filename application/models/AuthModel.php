@@ -82,12 +82,13 @@ class AuthModel extends CI_Model
 		$email = isset($data['email']) ? trim((string) $data['email']) : null;
 		$password = isset($data['password']) ? (string) $data['password'] : '';
 		$mahasiswaId = isset($data['mahasiswa_id']) ? trim((string) $data['mahasiswa_id']) : null;
+		$tanggal_lahir = isset($data['tanggal_lahir']) ? $data['tanggal_lahir'] : null;
 
 		if ($password === '') {
 			return false;
 		}
 
-		if (($nim === null || $nim === '') && ($email === null || $email === '')) {
+		if (($nim === null || $nim === '') && ($email === null || $email === '') && ($tanggal_lahir === null || $tanggal_lahir === '') ) {
 			return false;
 		}
 
@@ -98,10 +99,13 @@ class AuthModel extends CI_Model
 			return false;
 		}
 
+		
+
 		$insert = [
 			'id' => Uuid::uuid4()->toString(),
 			'nim' => ($nim !== '') ? $nim : null,
 			'email' => ($email !== '') ? $email : null,
+			'tanggal_lahir' => ($tanggal_lahir !== '') ? $tanggal_lahir : null,
 			'password_hash' => password_hash($password, PASSWORD_DEFAULT),
 			'mahasiswa_id' => ($mahasiswaId !== '') ? $mahasiswaId : null,
 			'is_active' => 1,
@@ -127,6 +131,20 @@ class AuthModel extends CI_Model
 	{
 		$this->db->where('id', $userId);
 		return $this->db->update($this->table, ['is_active' => 0]);
+	}
+
+	public function set_mahasiswa_id($userId, $mahasiswaId)
+	{
+		$userId = trim((string) $userId);
+		$mahasiswaId = trim((string) $mahasiswaId);
+		if ($userId === '' || $mahasiswaId === '') {
+			return false;
+		}
+
+		$this->db->where('id', $userId);
+		return $this->db->update($this->table, [
+			'mahasiswa_id' => $mahasiswaId,
+		]);
 	}
 
 	private function exists($field, $value)

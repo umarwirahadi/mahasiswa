@@ -7,6 +7,7 @@ class Mahasiswa extends MY_Controller {
 		parent::__construct();
 		$this->load->model('ReferensiModel');
 		$this->load->model('MahasiswaModel');
+		$this->load->model('AuthModel');
 		$this->load->library('form_validation');
 	}
 
@@ -102,7 +103,14 @@ class Mahasiswa extends MY_Controller {
 			];
 
 			// Insert data
-			if ($this->MahasiswaModel->insert_mahasiswa($data)) {
+			$id = $this->MahasiswaModel->insert_mahasiswa($data);
+			if ($id !== false) {
+				$authUserId = (string) $this->session->userdata('auth_user_id');
+				if ($authUserId !== '') {
+					$this->AuthModel->set_mahasiswa_id($authUserId, $id);
+				}
+
+				$this->session->set_userdata(['mahasiswa_id' => $id]);
 				$this->session->set_flashdata('success', 'Data mahasiswa berhasil disimpan.');
 				redirect('mahasiswa');
 			} else {

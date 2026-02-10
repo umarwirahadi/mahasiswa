@@ -62,8 +62,13 @@ class MahasiswaModel extends CI_Model {
     }
 
     public function insert_mahasiswa($data) {
-        $data['id'] = Uuid::uuid4()->toString();
-        return $this->db->insert($this->table, $data);
+        $id = isset($data['id']) ? trim((string) $data['id']) : '';
+        if ($id === '') {
+            $id = Uuid::uuid4()->toString();
+        }
+
+        $data['id'] = $id;
+        return $this->db->insert($this->table, $data) ? $id : false;
     }
 
     public function update_mahasiswa($id, $data) {

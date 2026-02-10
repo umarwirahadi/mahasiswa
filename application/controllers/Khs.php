@@ -5,6 +5,7 @@ class Khs extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
+		$this->load->model('KhsModel');
 	}
 
 	
@@ -15,10 +16,24 @@ class Khs extends MY_Controller {
 		$this->load->view('layouts/default', $data);
 	}
 
-	public function show($id)
+	public function show($npm)
 	{
 		$attribute['title'] = 'Kartu Hasil Studi';
-		$attribute['khs_id'] = $id;
+		
+		
+		$attribute['khs_id'] = $npm;
+		$data_khs = $this->KhsModel->get_nilai_by_npm($npm);
+		$total_sks = 0;
+		$total_smt = 0;
+		$total_matkul = count($data_khs);	
+		foreach($data_khs as $nilai) {
+			$total_sks += (int) $nilai->sks;
+			$total_smt += (int) max(0,$nilai->smt);
+		}
+		$attribute['total_sks'] = $total_sks;
+		$attribute['total_matkul'] = $total_matkul;
+		$attribute['total_smt'] = $total_smt;
+		$attribute['data_khs'] = $data_khs;
 		$data['content'] = $this->load->view('khs/show', $attribute, TRUE);
 		$this->load->view('layouts/default', $data);
 	}
