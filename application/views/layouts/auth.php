@@ -34,10 +34,45 @@
 	<link rel="stylesheet" href="<?= base_url('assets/css/plugins.min.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('assets/css/kaiadmin.min.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('assets/css/demo.css') ?>" />
+	<style>
+		body.auth-body {
+			background-image: url('<?= base_url('assets/img/blogpost.jpg') ?>');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+		body.auth-body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			background: var(--bs-body-bg, #f8f9fa);
+			opacity: 0.88;
+			pointer-events: none;
+			z-index: 0;
+		}
+		.auth-container {
+			position: relative;
+			z-index: 1;
+		}
+		.side-bar-login {
+			background-image: url('<?= base_url('assets/img/undraw/bg-login.jpg') ?>');
+			background-size: cover;
+			background-position: center;
+		}
+		.side-bar-register {
+			background-image: url('<?= base_url('assets/img/undraw/sign_up2.png') ?>');
+			background-size: cover;
+			background-position: center;
+		}
+		.bg-purple-ppg {
+			background-color: #BF55EC !important;
+		}
+	</style>
 </head>
 
-<body class="bg-light">
-	<div class="container min-vh-100 d-flex align-items-center justify-content-center py-4">
+<body class="bg-light auth-body">
+	<div class="container auth-container min-vh-100 d-flex align-items-center justify-content-center py-4 px-3">
 		<?= isset($content) ? $content : '' ?>
 	</div>
 

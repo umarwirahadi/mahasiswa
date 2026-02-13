@@ -69,7 +69,7 @@
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    <ul class="nav nav-secondary">
+                    <ul class="nav nav-secondary">						
                         <li class="nav-section">
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
@@ -255,8 +255,15 @@
                                 </ul>
                             </li>
                             
-                            
-
+                            <?php
+							if ($this->session->userdata('logged_in')):
+								$this->db->select('id,nama_mahasiswa,email');
+								$mahasiswa = $this->db->get_where('mahasiswa_new', [
+									'id' => $this->session->userdata('mahasiswa_id'),
+								])->row(); 								
+							
+							?>
+<li class="nav-item"><span class="text-success">online</span></li>
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 <a
                                     class="dropdown-toggle profile-pic"
@@ -270,8 +277,7 @@
                                             class="avatar-img rounded-circle" />
                                     </div>
                                     <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
-                                        <span class="fw-bold">Hizrian</span>
+                                        <span class="fw-bold"><?= $mahasiswa->nama_mahasiswa ?? $this->session->userdata('auth_identity'); ?></span>
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -285,8 +291,8 @@
                                                         class="avatar-img rounded" />
                                                 </div>
                                                 <div class="u-text">
-                                                    <h4>Hizrian</h4>
-                                                    <p class="text-muted">hello@example.com</p>
+                                                    <h4><?= htmlspecialchars($mahasiswa->nama_mahasiswa ?? $this->session->userdata('auth_identity'), ENT_QUOTES, 'UTF-8') ?></h4>
+                                                    <p class="text-muted"><?= htmlspecialchars($mahasiswa->email ?? '-', ENT_QUOTES, 'UTF-8') ?></p>
                                                     <a
                                                         href="<?= site_url('profile') ?>"
                                                         class="btn btn-xs btn-secondary btn-sm">View Profile</a>
@@ -295,14 +301,13 @@
                                         </li>
                                         <li>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="<?= site_url('profile') ?>">My Profile</a>
-                                            <a class="dropdown-item" href="#">Inbox</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
+                                            <!-- <a class="dropdown-item" href="#">Inbox</a> -->
+                                            <a class="dropdown-item" href="<?= site_url('logout') ?>">Logout</a>
                                         </li>
                                     </div>
                                 </ul>
                             </li>
+							<?php endif; ?>
                         </ul>
                     </div>
                 </nav>

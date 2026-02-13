@@ -58,6 +58,7 @@ $route['register'] = 'auth/register';
 $route['logout'] = 'auth/logout';
 
 $route['profile'] = 'welcome/profile';
+$route['profile/upload-photo'] = 'welcome/upload_photo_profile';
 
 $route['mahasiswa'] = 'mahasiswa/index';
 $route['mahasiswa/create'] = 'mahasiswa/create';

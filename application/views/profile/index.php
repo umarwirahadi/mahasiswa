@@ -11,28 +11,33 @@
         </div>
         <div class="card-body">
           <div class="user-profile text-center">
-            <div class="name">Umar Wirahadi</div>
-            <div class="job">07302156</div>
+            <div class="name"><?= $mahasiswa->nama_mahasiswa ?? '' ?></div>
+            <div class="job"><?= $this->session->userdata('auth_identity') ?? '-' ?></div>
             <div class="job">MIF-B3/07</div>
-            <div class="desc">D3 - Manajemen Informatika </div>
-           
+            <div class="desc">D3 - Manajemen Informatika </div>           
           </div>
         </div>
         <div class="card-footer">
-          <div class="row user-stats text-center">
-            <div class="col">
-              <div class="number">125</div>
-              <div class="title">Post</div>
-            </div>
-            <div class="col">
-              <div class="number">25K</div>
-              <div class="title">Followers</div>
-            </div>
-            <div class="col">
-              <div class="number">134</div>
-              <div class="title">Following</div>
-            </div>
-          </div>
+					<?php if ($this->session->flashdata('success')): ?>
+						<div class="alert alert-success" role="alert">
+							<?= $this->session->flashdata('success') ?>
+						</div>
+					<?php endif; ?>
+					<?php if ($this->session->flashdata('error')): ?>
+						<div class="alert alert-danger" role="alert">
+							<?= $this->session->flashdata('error') ?>
+						</div>
+					<?php endif; ?>
+          <form action="<?= site_url('profile/upload-photo') ?>" method="post" enctype="multipart/form-data" class="p-3">
+						<div class="form-group mb-2">
+							<label for="profile_photo" class="form-label">Ganti Foto Profil</label>
+							<input class="form-control" type="file" id="profile_photo" name="profile_photo" required>
+							<small class="form-text text-muted">Pilih file gambar (JPG, PNG, maks 2MB).</small>
+						</div>
+						<button type="submit" class="btn btn-primary btn-sm w-100">
+							<i class="fas fa-upload me-2"></i>Unggah
+						</button>
+					</form>
         </div>
       </div>
     </div>
@@ -46,9 +51,8 @@
             <div class="col-md-6 col-lg-4">
               <div class="form-group">
                 <label for="email2">Email Address</label>
-                <input type="email" class="form-control" id="email2" placeholder="Enter Email" />
-                <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone
-                  else.</small>
+                <input type="email" class="form-control" id="email2" placeholder="Enter Email" value="<?= $mahasiswa->email?? '' ?>" />
+                
               </div>
             </div>
             <div class="col-md-6 col-lg-4">
@@ -66,7 +70,31 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label for="address">Address</label>
-                <textarea class="form-control" id="address" rows="5"></textarea>
+								<?php
+								$alamat = '';
+								if (isset($mahasiswa->jalan) && $mahasiswa->jalan != '') {
+									$alamat .= $mahasiswa->jalan;
+								}
+								if (isset($mahasiswa->kelurahan) && $mahasiswa->kelurahan != '') {
+									if ($alamat != '') {
+										$alamat .= ', ';
+									}
+									$alamat .= 'Kel. ' . $mahasiswa->kelurahan;;
+								}
+								if (isset($mahasiswa->kecamatan) && $mahasiswa->kecamatan != '') {
+									if ($alamat != '') {
+										$alamat .= ', ';
+									}
+									$alamat .= 'Kec. ' . $mahasiswa->kecamatan;;
+								}
+								if (isset($mahasiswa->kode_pos) && $mahasiswa->kode_pos != '') {
+									if ($alamat != '') {
+										$alamat .= ', ';
+									}
+									$alamat .= $mahasiswa->kode_pos;;
+								}
+								?>
+                <textarea class="form-control" id="address" rows="5"><?= $alamat ?></textarea>
               </div>
             </div>
           </div>

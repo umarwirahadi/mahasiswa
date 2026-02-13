@@ -69,10 +69,47 @@ class Welcome extends MY_Controller {
 
 	public function profile()
 	{
+		
+		$mahasiwa = $this->MahasiswaModel->get_mahasiswa_by_id((string) $this->session->userdata('mahasiswa_id'));
 		$attribute['title'] = 'Profile Mahasiswa';
 		$attribute['sub_title'] = 'Data profile saya';
+		$attribute['mahasiswa'] = $mahasiwa;
 		$data['content'] = $this->load->view('profile/index', $attribute, TRUE);
 		$this->load->view('layouts/default', $data);
 
+	}
+
+	public function upload_photo_profile()
+	{
+		$mahasiswa_id = (string) $this->session->userdata('mahasiswa_id');
+		if ($mahasiswa_id === '') {
+			$this->session->set_flashdata('error', 'Anda harus login terlebih dahulu untuk mengunggah foto profil.');
+			redirect('login');
+			return;
+		}
+
+		$config['upload_path'] = './uploads/profile_photos/';
+		$config['allowed_types'] = 'jpg|jpeg|png';
+		$config['max_size'] = 2048; // 2MB
+		$config['file_name'] = 'profile_' . $mahasiswa_id . '_' . time();
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('profile_photo')) {
+			$this->session->set_flashdata('error', 'Gagal mengunggah foto profil: ' . $this->upload->display_errors());
+			redirect('profile');
+			return;
+		} else {
+			$uploadData = $this->upload->data();
+			$photoPath = 'uploads/profile_photos/' . $uploadData['file_name'];
+
+			// Update database
+			$updateData = ['photo_path' => $photoPath];
+			$this->MahasiswaModel->update_mahasiswa($mahasiswa_id, $updateData);
+
+			$this->session->set_flashdata('success', 'Foto profil berhasil diunggah.');
+			redirect('profile');
+			return;
+		}
 	}
 }

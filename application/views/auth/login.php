@@ -4,21 +4,21 @@
 			<div class="row g-0">
 				<!-- Left brand panel (desktop) -->
 				<div class="col-md-5 d-none d-md-flex bg-primary text-white">
-					<div class="p-4 d-flex flex-column justify-content-between w-100">
+					<div class="p-4 d-flex flex-column justify-content-between w-100 side-bar-login">
 						<div>
 							<div class="d-flex align-items-center mb-4">
 								<img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo" height="36" class="me-2" />
 								<div class="fw-bold">SIMAK</div>
 							</div>
-							<h3 class="fw-bold mb-2">Portal Mahasiswa</h3>
-							<p class="mb-0 opacity-75">Masuk untuk melihat KHS, pembayaran, dan data profil.</p>
+							<!-- <h3 class="fw-bold mb-2">Portal Mahasiswa</h3>
+							<p class="mb-0 opacity-75">Masuk untuk melihat KHS, pembayaran, dan data profil.</p> -->
 						</div>
 						<div class="small opacity-75">&copy; <?= date('Y') ?> SIMAK</div>
 					</div>
 				</div>
 
 				<!-- Form panel -->
-				<div class="col-12 col-md-7">
+				<div class="col-12 col-md-7 bg-purple-ppg text-white">
 					<div class="p-4 p-md-5">
 						<div class="d-md-none d-flex align-items-center mb-4">
 							<img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo" height="32" class="me-2" />
@@ -32,13 +32,13 @@
 						<p class="text-muted mb-4">Silakan masukkan akun Anda.</p>
 
 						<?php if (!empty($flash_success)): ?>
-							<div class="alert alert-success" role="alert"><?= htmlspecialchars((string) $flash_success, ENT_QUOTES, 'UTF-8') ?></div>
+							<div class="alert alert-success text-primary" role="alert"><?= htmlspecialchars((string) $flash_success, ENT_QUOTES, 'UTF-8') ?></div>
 						<?php endif; ?>
 						<?php if (!empty($flash_error)): ?>
-							<div class="alert alert-danger" role="alert"><?= htmlspecialchars((string) $flash_error, ENT_QUOTES, 'UTF-8') ?></div>
+							<div class="alert alert-danger text-danger" role="alert"><?= htmlspecialchars((string) $flash_error, ENT_QUOTES, 'UTF-8') ?></div>
 						<?php endif; ?>
 						<?php if (!empty($login_error)): ?>
-							<div class="alert alert-danger" role="alert"><?= htmlspecialchars((string) $login_error, ENT_QUOTES, 'UTF-8') ?></div>
+							<div class="alert alert-danger text-danger" role="alert"><?= htmlspecialchars((string) $login_error, ENT_QUOTES, 'UTF-8') ?></div>
 						<?php endif; ?>
 						<?php if (validation_errors()): ?>
 							<div class="alert alert-danger" role="alert">

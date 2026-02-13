@@ -1,6 +1,6 @@
 <div class="page-inner">
     <?php
-    $session_user = isset($session_user) && is_array($session_user) ? $session_user : [];
+  /*   $session_user = isset($session_user) && is_array($session_user) ? $session_user : [];
     $identity = isset($session_user['auth_identity']) ? (string) $session_user['auth_identity'] : '';
     $nim = isset($session_user['nim']) ? (string) $session_user['nim'] : '';
     $authUserId = isset($session_user['auth_user_id']) ? (string) $session_user['auth_user_id'] : '';
@@ -9,7 +9,12 @@
     $email = isset($mahasiswa) && isset($mahasiswa->email) ? (string) $mahasiswa->email : '';
     $hp = isset($mahasiswa) && isset($mahasiswa->handphone) ? (string) $mahasiswa->handphone : '';
     $tglLahir = isset($mahasiswa) && isset($mahasiswa->tanggal_lahir) ? (string) $mahasiswa->tanggal_lahir : '';
-    $source = isset($mahasiswa_source) ? (string) $mahasiswa_source : '';
+    $source = isset($mahasiswa_source) ? (string) $mahasiswa_source : ''; */
+
+	$mahasiswa = $this->db->get_where('mahasiswa_new', [
+		'id' => $this->session->userdata('mahasiswa_id'),
+	])->row();
+
     ?>
 
     <!-- User Summary -->
@@ -27,19 +32,21 @@
                             <div class="row g-3">
                                 <div class="col-12 col-md-4">
                                     <span class="text-muted small d-block">Login Sebagai</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($identity !== '' ? $identity : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <strong class="h6 mb-0">Mahasiswa</strong>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <span class="text-muted small d-block">NIM/NPM</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($nim !== '' ? $nim : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <strong class="h6 mb-0"><?= $this->session->userdata('nim') ?? '-'; ?></strong>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <span class="text-muted small d-block">Nama Mahasiswa</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($nama !== '' ? $nama : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <strong class="h6 mb-0"><?= htmlspecialchars($mahasiswa->nama_mahasiswa !== '' ? $mahasiswa->nama_mahasiswa : '-', ENT_QUOTES, 'UTF-8') ?></strong>
                                 </div>
                                 <div class="col-12 col-md-2">
-                                    <span class="text-muted small d-block">Sumber Data</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($source !== '' ? $source : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <span class="text-muted small d-block">Sudah Melakukan update ?</span>
+                                    <strong class="h6 mb-0">
+										<?= !empty($mahasiswa) ? 'Ya' : 'Belum' ?>
+									</strong>
                                 </div>
                             </div>
 
@@ -48,15 +55,15 @@
                             <div class="row g-3">
                                 <div class="col-12 col-md-4">
                                     <span class="text-muted small d-block">Email</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($email !== '' ? $email : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <strong class="h6 mb-0"><?= htmlspecialchars($mahasiswa->email !== '' ? $mahasiswa->email : '-', ENT_QUOTES, 'UTF-8') ?></strong>
                                 </div>
                                 <div class="col-12 col-md-4">
                                     <span class="text-muted small d-block">No. HP</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($hp !== '' ? $hp : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <strong class="h6 mb-0"><?= htmlspecialchars($mahasiswa->handphone !== '' ? $mahasiswa->handphone : '-', ENT_QUOTES, 'UTF-8') ?></strong>
                                 </div>
                                 <div class="col-12 col-md-4">
                                     <span class="text-muted small d-block">Tanggal Lahir</span>
-                                    <strong class="h6 mb-0"><?= htmlspecialchars($tglLahir !== '' ? $tglLahir : '-', ENT_QUOTES, 'UTF-8') ?></strong>
+                                    <strong class="h6 mb-0"><?= htmlspecialchars($mahasiswa->tanggal_lahir !== '' ? $mahasiswa->tanggal_lahir : '-', ENT_QUOTES, 'UTF-8') ?></strong>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +106,7 @@
                         <div class="col col-stats ms-3 ms-sm-0">
                             <div class="numbers">
                                 <p class="card-category">User ID</p>
-                                <h4 class="card-title"><?= htmlspecialchars($authUserId !== '' ? substr($authUserId, 0, 8) . '…' : '-', ENT_QUOTES, 'UTF-8') ?></h4>
+                                <h4 class="card-title"><?= htmlspecialchars($this->session->userdata('nim') !== '' ? substr($mahasiswa->id, 0, 20) . '…' : '-', ENT_QUOTES, 'UTF-8') ?></h4>
                             </div>
                         </div>
                     </div>
@@ -152,27 +159,8 @@
         <div class="card card-round">
             <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
-                    <div class="card-title">Transaction History</div>
-                    <div class="card-tools">
-                        <div class="dropdown">
-                            <button
-                                class="btn btn-icon btn-clean me-0"
-                                type="button"
-                                id="dropdownMenuButton"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                            <div
-                                class="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="card-title">Jurusan dan Kelas</div>
+                    
                 </div>
             </div>
             <div class="card-body p-0">
@@ -181,111 +169,16 @@
                     <table class="table align-items-center mb-0">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Payment Number</th>
-                                <th scope="col" class="text-end">Date & Time</th>
-                                <th scope="col" class="text-end">Amount</th>
+                                <th scope="col">NPM</th>
+                                <th scope="col" class="text-end">Kelas</th>
+                                <th scope="col" class="text-end">Program</th>
+                                <th scope="col" class="text-end">Jurusan</th>
                                 <th scope="col" class="text-end">Status</th>
+                                <th scope="col" class="text-end">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <button
-                                        class="btn btn-icon btn-round btn-success btn-sm me-2">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    Payment from #10231
-                                </th>
-                                <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                                <td class="text-end">$250.00</td>
-                                <td class="text-end">
-                                    <span class="badge badge-success">Completed</span>
-                                </td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>

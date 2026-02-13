@@ -4,16 +4,16 @@
 			<div class="row g-0">
 				<!-- Left info panel (desktop) -->
 				<div class="col-md-5 d-none d-md-flex bg-primary text-white">
-					<div class="p-4 d-flex flex-column justify-content-between w-100">
+					<div class="p-4 d-flex flex-column justify-content-between w-100 side-bar-register">
 						<div>
 							<div class="d-flex align-items-center mb-4">
 								<img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo" height="36" class="me-2" />
-								<div class="fw-bold">SIMAK</div>
+								<div class="fw-bold">POLITEKNIK PIKSI GANESHA</div>
 							</div>
-							<h3 class="fw-bold mb-2">Buat Akun</h3>
-							<p class="mb-0 opacity-75">Daftar untuk mengakses layanan Portal Mahasiswa.</p>
+<!-- 							<h3 class="fw-bold mb-2">Buat Akun</h3>
+							<p class="mb-0 opacity-75">Daftar untuk mengakses layanan Portal Mahasiswa.</p> -->
 						</div>
-						<div class="small opacity-75">Pastikan data sesuai identitas kampus.</div>
+						<div class="small opacity-75">Pastikan data sesuai.</div>
 					</div>
 				</div>
 
