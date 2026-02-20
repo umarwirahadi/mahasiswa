@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Untitled</title>
+    <title>SIMAK</title>
     <meta
         content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
         name="viewport" />
@@ -272,7 +272,7 @@
                                     aria-expanded="false">
                                     <div class="avatar-sm">
                                         <img
-                                            src="assets/img/profile.jpg"
+                                            src="assets/img/user.png"
                                             alt="..."
                                             class="avatar-img rounded-circle" />
                                     </div>
@@ -286,7 +286,7 @@
                                             <div class="user-box">
                                                 <div class="avatar-lg">
                                                     <img
-                                                        src="assets/img/profile.jpg"
+                                                        src="assets/img/user.png"
                                                         alt="image profile"
                                                         class="avatar-img rounded" />
                                                 </div>

@@ -5,7 +5,7 @@
         <div class="card-header" style="background-image: url('../assets/img/blogpost.jpg')">
           <div class="profile-picture">
             <div class="avatar avatar-xl">
-              <img src="<?= base_url('assets/img/profile.jpg') ?>" alt="..." class="avatar-img rounded-circle" />
+              <img src="<?= base_url('assets/img/user.png') ?>" alt="..." class="avatar-img rounded-circle" />
             </div>
           </div>
         </div>
@@ -13,8 +13,8 @@
           <div class="user-profile text-center">
             <div class="name"><?= $mahasiswa->nama_mahasiswa ?? '' ?></div>
             <div class="job"><?= $this->session->userdata('auth_identity') ?? '-' ?></div>
-            <div class="job">MIF-B3/07</div>
-            <div class="desc">D3 - Manajemen Informatika </div>           
+            <div class="job">-</div>
+            <div class="desc">- </div>           
           </div>
         </div>
         <div class="card-footer">
