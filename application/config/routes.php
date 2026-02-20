@@ -68,3 +68,7 @@ $route['kartu-hasil-studi/(:any)'] = 'khs/show/$1';
 
 $route['pembayaran-mahasiswa'] = 'pembayaran/index';
 $route['pembayaran-mahasiswa/(:any)'] = 'pembayaran/show/$1';
+
+$route['ksk-mahasiswa'] = 'ksk/index';
+
+$route['kartu-studi-mahasiswa'] = 'ks/index';

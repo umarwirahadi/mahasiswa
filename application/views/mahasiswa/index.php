@@ -5,10 +5,10 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h4 class="card-title">Data Mahasiswa</h4>
-                        <a href="<?= base_url('mahasiswa/create') ?>" class="btn btn-primary btn-round ms-auto">
+                        <!-- <a href="<?= base_url('mahasiswa/create') ?>" class="btn btn-primary btn-round ms-auto">
                             <i class="fa fa-plus"></i>
                             Tambah Mahasiswa
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -51,10 +51,10 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h4 class="card-title">Data Jurusan dan Kelas</h4>
-                        <a href="<?= base_url('mahasiswa/create') ?>" class="btn btn-primary btn-round ms-auto">
+                        <!-- <a href="<?= base_url('mahasiswa/create') ?>" class="btn btn-primary btn-round ms-auto">
                             <i class="fa fa-plus"></i>
                             Tambah Mahasiswa
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="card-body">

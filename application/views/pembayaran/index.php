@@ -11,7 +11,7 @@
 					<?php
 					// Demo data (replace with data from controller/model)
 					$payments = isset($payments) ? $payments : [
-						[
+						/* [
 							'id' => 10021,
 							'tanggal' => '2026-01-15 10:21',
 							'jenis' => 'SPP',
@@ -43,7 +43,7 @@
 							'channel' => 'Transfer Bank',
 							'referensi' => 'TRF-20250210-1120',
 							'status' => 'Menunggu Verifikasi',
-						],
+						], */
 					];
 
 					$totalTagihan = 0;
@@ -128,7 +128,9 @@
 										<div class="col col-stats ms-3 ms-sm-0">
 											<div class="numbers">
 												<p class="card-category">Total Tagihan</p>
-												<h4 class="card-title">Rp <?= number_format($totalTagihan, 0, ',', '.') ?></h4>
+
+												<h4 class="card-title">Rp 0</h4>
+												<!-- <h4 class="card-title">Rp <?= number_format($totalTagihan, 0, ',', '.') ?></h4> -->
 											</div>
 										</div>
 									</div>
